@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Morse Code Translator</title>
+  <style>
+    html{
+      width: 100vw;
+      height: 100vh;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #C0BABC;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #FFE604;
+    }
+
+    h2{
+      margin-top: -20px;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #06115d;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      justify-content: center;
+    }
+
+    p {
+      margin: 10px 0;
+      color: #FFE604;
+    }
+
+    .rules{
+      color: #DAC4F7;
+    }
+    #code {
+      font-weight: bold;
+    }
+
+    #english {
+      font-weight: bold;
+    }
+
+    .name{
+      color: #FFE604;
+    }
+
+    img{
+      padding-right: 70px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Morse Code Translator</h1>
+    <h2 class="name">Manav Muthanna - 21BIT0151</h2>
+    <p>Morse Code: <span id="code"></span></p>
+    <p>English Translation: <span id="english"></span></p>
+    <br>
+    <h2 class="rules">Guidelines</h2>
+    <p class="rules">- Give a SPACE after each character</p>
+    <p class="rules">- Hit RESET on NodeMCU and wait for a few seconds, then give input to refresh</p>
+  </div>
+
+  <img src="https://cdn.discordapp.com/attachments/1017669080259502113/1128087724029661275/morsecode-1.png">
+
+  <script>
+    const codeElement = document.getElementById("code");
+    const englishElement = document.getElementById("english");
+
+    setInterval(function() {
+      fetch("/stream")
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          const code = data.code;
+          const english = data.english;
+
+          console.log(code);
+          console.log(english);
+
+          codeElement.innerHTML = code;
+          englishElement.innerHTML = english;
+        })
+        .catch(function(error) {
+          console.error("Error:", error);
+        });
+    }, 1000);
+  </script>
+</body>
+</html>
