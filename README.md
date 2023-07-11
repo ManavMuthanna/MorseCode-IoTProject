@@ -8,6 +8,13 @@ A Morse Code Translator made using a NodeMCU module and three switches with deno
 
 which is then connected to a custom Flask API to recieve the input, translate and display the output in realtime!
 
+## Deployment
+
+To deploy this project run
+
+```bash
+  python app.py
+```
 
 # Output
 
